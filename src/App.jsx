@@ -6,8 +6,7 @@ function App() {
   const [joke, setJoke] = useState('')
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    async function fetchJoke() {
+  async function fetchJoke() {
       setLoading(true)
       try {
         const response = await fetch('https://v2.jokeapi.dev/joke/Programming?type=single')
@@ -18,7 +17,10 @@ function App() {
       } finally {
         setLoading(false)
       }
-    } fetchJoke()
+    } 
+
+  useEffect(() => {
+    fetchJoke()
   }, [])
 
 
@@ -28,7 +30,7 @@ function App() {
       {/* Step 4: Pass the necessary props to JokeDisplay */}
       <JokeDisplay joke={joke} loading={loading}/>
       {/* Step 5: Pass the function to FetchButton so it can fetch a new joke on click */}
-      <FetchButton />
+      <FetchButton fetchJoke={fetchJoke}/>
     </div>
   )
 }
